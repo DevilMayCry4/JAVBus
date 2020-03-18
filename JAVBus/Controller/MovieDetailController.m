@@ -17,6 +17,7 @@
 #import "CategoryItemListController.h"
 #import <MediaPlayer/MediaPlayer.h>
 #import <MBProgressHUD/MBProgressHUD.h>
+#import <SafariServices/SafariServices.h>
 
 @interface MovieDetailController ()<UICollectionViewDelegate, UICollectionViewDataSource>
 
@@ -82,7 +83,18 @@
     button.selected = isExsit;
     
     UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:button];
-    self.navigationItem.rightBarButtonItem = item;
+    
+    
+    UIBarButtonItem *item2 = [[UIBarButtonItem  alloc] initWithTitle:@"链接" style:UIBarButtonItemStylePlain target:self action:@selector(gotoLink)];
+    
+    self.navigationItem.rightBarButtonItems = @[item,item2];
+}
+
+-(void)gotoLink{
+    SFSafariViewController *controller = [[SFSafariViewController  alloc] initWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://btsow.club/search/%@",self.model.number]]];
+    [self presentViewController:controller animated:YES completion:^{
+         
+    }];
 }
 
 - (void)collectionActress:(UIButton *)sender {
